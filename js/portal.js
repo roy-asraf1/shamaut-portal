@@ -14,6 +14,7 @@
     { id: 'accounting', title: 'חוברת 4 · חשבונאות' },
     { id: 'survey', title: 'חוברת 5 · מדידה ומיפוי' },
     { id: 'engineering', title: 'חוברת 6 · הנדסת בניין' },
+    { id: 'planning', title: 'חוברת 7 · תכנון עירוני' },
     { id: 'admin', title: 'ניהול', adminOnly: true },
   ];
 
