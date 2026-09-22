@@ -89,10 +89,19 @@
         h('div', { class: 'card-desc' }, t.description),
         t.chapters && h('div', { class: 'chip' }, t.chapters)));
 
+    // כלי יכול להציג כרטיס מצב בראש דף הבית (homeWidget מחזיר Promise<Element>)
+    const widgets = h('div', { class: 'stack' });
+    for (const t of visibleTools().filter((x) => x.homeWidget)) {
+      const slot = h('div');
+      widgets.append(slot);
+      t.homeWidget().then((el) => el && fill(slot, el)).catch(() => slot.remove());
+    }
+
     return h('div', { class: 'home' },
       h('header', { class: 'tool-header' },
         h('h1', {}, `שלום ${profile.full_name || profile.username}`),
         h('p', {}, 'חוברות לימוד, תרגול שאלות בסגנון הבחינה וכלי חישוב לבחינות המוקדמות של מועצת שמאי המקרקעין.')),
+      widgets,
       visibleGroups().map((g) => {
         const groupTools = visibleTools().filter((t) => t.group === g.id);
         return groupTools.length > 0 && h('section', { class: 'home-section' },

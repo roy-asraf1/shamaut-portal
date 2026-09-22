@@ -264,3 +264,16 @@ details.more[open] summary { margin-bottom: 8px; }
 }
 
 .rich-line { min-height: 1em; }
+
+/* ---------- מועדי בחינות ---------- */
+.exam-banner { border: 1px solid var(--border); border-inline-start: 4px solid var(--accent); border-radius: var(--radius); background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.exam-banner.good { border-inline-start-color: var(--good); background: var(--good-soft); }
+.exam-banner.alert { border-inline-start-color: var(--warn); background: var(--warn-soft); }
+.exam-banner-title { font-size: 18px; font-weight: 700; }
+.exam-banner p { margin: 0; }
+.session-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.session-head h2 { margin: 0; font-size: 18px; }
+.chip-past { background: var(--surface-2); color: var(--muted); }
+.admin-box summary { cursor: pointer; font-weight: 600; }
+.admin-box { display: block; }
+.admin-box > *:not(summary) { margin-top: 10px; }

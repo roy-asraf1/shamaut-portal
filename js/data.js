@@ -59,6 +59,27 @@
       return check(await db().storage.from('booklets').createSignedUrl(path, 3600), 'קובץ החוברת').signedUrl;
     },
 
+    /** מועדי בחינות + מתי נבדקו לאחרונה */
+    async examDates() {
+      const [dates, meta] = await Promise.all([
+        db().from('exam_dates').select('*').order('exam_at').then((r) => check(r, 'מועדי הבחינות')),
+        db().from('portal_meta').select('key, value').then((r) => check(r, 'נתוני הפורטל')),
+      ]);
+      return { dates, meta: Object.fromEntries(meta.map((m) => [m.key, m.value])) };
+    },
+
+    async saveExamDate(row) {
+      return check(await db().from('exam_dates').upsert(row).select().single(), 'שמירת המועד');
+    },
+
+    async deleteExamDate(id) {
+      check(await db().from('exam_dates').delete().eq('id', id), 'מחיקת המועד');
+    },
+
+    async saveMeta(key, value) {
+      check(await db().from('portal_meta').upsert({ key, value }).select().single(), 'שמירת הנתון');
+    },
+
     async profiles() {
       return check(await db().from('profiles').select('*').order('created_at', { ascending: false }), 'המשתמשים');
     },
